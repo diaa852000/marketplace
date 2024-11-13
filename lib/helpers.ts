@@ -211,10 +211,6 @@ export async function findProduct(id: string) {
 
 
 export async function FindUserDb(id: string) {
-    if (!id) {
-        throw new Error("not Authenticated")
-    }
-
     const data = await prisma.user.findUnique({
         where: {
             id: id as string,
