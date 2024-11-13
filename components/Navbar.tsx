@@ -35,7 +35,7 @@ export default async function Navbar() {
             <div className="flex items-center gap-x-3 ms-auto md:col-span-3">
                 {user
                     ? <UserNavbar
-                        name={userDb?.firstName as string || user.given_name as string}
+                        name={(userDb?.firstName || user.given_name) as string}
                         email={user.email as string}
                         userImage={user.picture ?? `https://avatar.vercel.sh/${user.given_name}`}
                     />
