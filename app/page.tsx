@@ -1,17 +1,20 @@
 import ProductRow from "@/components/ProductRow";
 import { CategoriesEnum } from "@/constants";
-import { findUser } from "@/lib/helpers";
+import { findUser, FindUserDb } from "@/lib/helpers";
 import {unstable_noStore as noStore} from 'next/cache';
 
 export default async function Home() {
   noStore();
+
   const user = await findUser();
+  const userDb = await FindUserDb(user?.id ?? "");
+
 
   return (
     <section className="main-container pt-20">
       <div className="py-20">
         <div className="text-center">
-          {user && <h1 className="pb-4 text-2xl sm:text-4xl lg:text-5xl font-semibold">Hello, <span className="text-primary">{user?.given_name} 👋</span></h1>}
+          {user && <h1 className="pb-4 text-2xl sm:text-4xl lg:text-5xl font-semibold">Hello, <span className="text-primary">{userDb?.firstName} 👋</span></h1>}
           <h1 className="text-xl sm:text-3xl lg:text-4xl font-medium">
             <span>Find the best Tailwind</span>
             <span className="text-primary ml-3">Templates & Icons</span>
