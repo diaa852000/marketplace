@@ -5,11 +5,9 @@ import { unstable_noStore as noStore } from 'next/cache';
 
 export default async function MyProductPage() {
     noStore();
-    const user = await findUser();
 
-    if (!user) {
-        throw new Error("not Authenticated")
-    }
+    const user = await findUser();
+    if (!user) throw new Error("not Authenticated")
 
     const data = await getAllUserProducts(user?.id as string);
 

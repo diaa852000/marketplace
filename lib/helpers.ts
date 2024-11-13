@@ -5,7 +5,6 @@ import { type CategoryTypes } from "@prisma/client";
 import { ICategories } from "@/types";
 import { CategoriesEnum } from "@/constants";
 
-
 export async function findUser() {
     const { getUser } = getKindeServerSession();
     const user = await getUser();

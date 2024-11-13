@@ -6,8 +6,11 @@ import { findUser } from "@/lib/helpers";
 import { productSchema, userSettingsSchema } from "@/lib/validation";
 import { State } from "@/types";
 import { type CategoryTypes } from "@prisma/client";
+import {unstable_noStore as noStore} from 'next/cache';
+
 
 export async function SellProductAction(prevState: any, formDate: FormData) {
+    noStore();
     const user = await findUser();
     if (!user) throw new Error("Please Authenticate first!");
 
@@ -54,6 +57,7 @@ export async function SellProductAction(prevState: any, formDate: FormData) {
 }
 
 export async function UpdateUserSettings(prevState: any, formData: FormData) {
+    noStore();
     const user = await findUser();
     if(!user) throw new Error("Something went wrong!");
 
