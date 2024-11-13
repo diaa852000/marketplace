@@ -2,11 +2,12 @@ import { Card } from "@/components/ui/card";
 import SellForm from "@/components/form/SellForm";
 import { findUser } from "@/lib/helpers";
 import { unstable_noStore as noStore } from 'next/cache';
+import { redirect } from "next/navigation";
 
 export default async function SellPage() {
     noStore();
     const user = await findUser();
-    if (!user) throw new Error("not Authenticated")
+    if(!user) redirect('/');
 
     return (
         <section className="main-container mb-14">
