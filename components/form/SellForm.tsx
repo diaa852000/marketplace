@@ -26,12 +26,14 @@ export default function SellForm() {
     useEffect(() => {
         if (state.status === "success") {
             toast.success(state.message);
-            redirect("/");
+            redirect(
+                process.env.NODE_ENV === "development" ? 'http://localhost:3000' : "https://marketplace-8hzy.vercel.app/"
+            );
         } else if (state.status === "error") {
             toast.error(state.message);
         }
     }, [state.status, state.message, state.errors])
-    
+
     return (
         <form action={formAction}>
             <CardHeader>

@@ -7,7 +7,9 @@ import { redirect } from "next/navigation";
 export default async function SellPage() {
     noStore();
     const user = await findUser();
-    if(!user) redirect('/');
+    if (!user) redirect(
+        process.env.NODE_ENV === "development" ? 'http://localhost:3000' : "https://marketplace-8hzy.vercel.app/"
+    );
 
     return (
         <section className="main-container mb-14">

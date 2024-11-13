@@ -18,11 +18,8 @@ const ThemeToggleButton = dynamic(() => import('./ThemeToggleButton'), {
 
 export default async function Navbar() {
     noStore();
-    // const { getUser } = getKindeServerSession();
-    // const user = await getUser();
-    
+
     const user = await findUser();
-    
     const userDb = await FindUserDb(user?.id ?? "");
 
     return (

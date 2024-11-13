@@ -8,7 +8,9 @@ export default async function SettingsPage() {
     noStore();
 
     const user = await findUser();
-    if(!user) redirect('/');
+    if (!user) redirect(
+        process.env.NODE_ENV === "development" ? 'http://localhost:3000' : "https://marketplace-8hzy.vercel.app/"
+    );
 
     const data = await getUserUpdateData(user?.id as string);
 
