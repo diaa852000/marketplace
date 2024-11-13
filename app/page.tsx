@@ -7,7 +7,7 @@ export default async function Home() {
   noStore();
   const user = await findUser();
 
-  if(!user) throw new Error("not Authenticated")
+  // if(!user) throw new Error("not Authenticated")
   
 
   return (
