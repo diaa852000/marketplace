@@ -211,9 +211,9 @@ export async function findProduct(id: string) {
 
 
 export async function FindUserDb(id: string) {
-    const data = await prisma.user.findUnique({
+    const data = await prisma.user.findFirst({
         where: {
-            id: id as string,
+            id: id ?? "",
         }
     });
 

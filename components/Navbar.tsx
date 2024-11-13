@@ -23,7 +23,7 @@ export default async function Navbar() {
     
     const user = await findUser();
     
-    const userDb = await FindUserDb(user?.id as string);
+    const userDb = await FindUserDb(user?.id ?? "");
 
     return (
         <nav className="relative main-container w-full flex md:grid md:grid-cols-12 items-center py-7 border-b">
