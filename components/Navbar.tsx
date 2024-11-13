@@ -3,11 +3,13 @@ import NavbarLinks from "./NavbarLinks";
 import { Button } from "./ui/button";
 import MobileMenu from "./MobileMenu";
 import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+// import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import UserNavbar from "./UserNavbar";
 // import ThemeToggleButton from "./ThemeToggleButton";
-import { FindUserDb } from "@/lib/helpers";
+import { findUser, FindUserDb } from "@/lib/helpers";
 import dynamic from "next/dynamic";
+import {unstable_noStore as noStore} from 'next/cache';
+
 
 const ThemeToggleButton = dynamic(() => import('./ThemeToggleButton'), {
     ssr: false,
@@ -15,9 +17,13 @@ const ThemeToggleButton = dynamic(() => import('./ThemeToggleButton'), {
 
 
 export default async function Navbar() {
-    const { getUser } = getKindeServerSession();
-    const user = await getUser();
-    const userDb = await FindUserDb(user.id);
+    noStore();
+    // const { getUser } = getKindeServerSession();
+    // const user = await getUser();
+    
+    const user = await findUser();
+    
+    const userDb = await FindUserDb(user?.id as string);
 
     return (
         <nav className="relative main-container w-full flex md:grid md:grid-cols-12 items-center py-7 border-b">

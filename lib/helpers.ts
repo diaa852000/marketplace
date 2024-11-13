@@ -127,6 +127,7 @@ async function getRowsCategoryData(category: string) {
         },
         take: 3,
     });
+
     return {
         data,
         title: category === "tamplate" ? 'template' : `${category}s`,
@@ -205,7 +206,6 @@ export async function findProduct(id: string) {
         },
     });
 
-    if (!data) throw new Error("There's no Product with this Id");
     return data;
 }
 
@@ -215,13 +215,12 @@ export async function FindUserDb(id: string) {
         throw new Error("not Authenticated")
     }
 
-    const data = await prisma.user.findFirst({
+    const data = await prisma.user.findUnique({
         where: {
             id: id as string,
         }
     });
 
-    if (!data) return;
 
     return data;
 }
