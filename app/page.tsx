@@ -7,6 +7,9 @@ export default async function Home() {
   noStore();
   const user = await findUser();
 
+  if(!user) {
+    throw new Error("not Authenticated")
+  }
 
   return (
     <section className="main-container pt-20">

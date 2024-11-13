@@ -5,7 +5,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { getProductData } from "@/lib/helpers";
 import { JSONContent } from "@tiptap/react";
 import Image from "next/image";
-import {unstable_noStore as noStore} from 'next/cache';
+import { unstable_noStore as noStore } from 'next/cache';
 
 export default async function ProductPage({ params }: { params: { id: string } }) {
     noStore();
@@ -38,9 +38,9 @@ export default async function ProductPage({ params }: { params: { id: string } }
                     <input
                         type="hidden"
                         name="id"
-                        value={data?.id} 
+                        value={data?.id}
                     />
-                    <BuyButton price={data?.price as number}/>
+                    <BuyButton price={data?.price as number} />
                 </form>
                 <div className="border-t border-gray-200 dark:border-muted-foreground mt-10 pt-10">
                     <div className="grid grid-cols-2 w-full gap-y-3">
