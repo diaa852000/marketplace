@@ -3,9 +3,7 @@ import NavbarLinks from "./NavbarLinks";
 import { Button } from "./ui/button";
 import MobileMenu from "./MobileMenu";
 import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
-// import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import UserNavbar from "./UserNavbar";
-// import ThemeToggleButton from "./ThemeToggleButton";
 import { findUser, FindUserDb } from "@/lib/helpers";
 import dynamic from "next/dynamic";
 import {unstable_noStore as noStore} from 'next/cache';
@@ -35,7 +33,7 @@ export default async function Navbar() {
             <div className="flex items-center gap-x-3 ms-auto md:col-span-3">
                 {user
                     ? <UserNavbar
-                        name={(userDb?.firstName || user.given_name) as string}
+                        name={userDb?.firstName as string}
                         email={user.email as string}
                         userImage={user.picture ?? `https://avatar.vercel.sh/${user.given_name}`}
                     />
