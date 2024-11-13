@@ -1,18 +1,13 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { NextSSRPlugin } from '@uploadthing/react/next-ssr-plugin'
+import { extractRouterConfig } from "uploadthing/server";
+import { ourFileRouter } from "./api/uploadthing/core";
+import { Toaster } from "@/components/ui/sonner";
+import { ThemeProviders } from "@/components/Providers";
+import Footer from "@/components/Footer";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,10 +22,26 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`antialiased`}
       >
-        <Navbar/>
-        {children}
+        <ThemeProviders
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NextSSRPlugin
+            routerConfig={extractRouterConfig(ourFileRouter)}
+          />
+          <Navbar />
+          {children}
+          <Footer />
+          <Toaster
+            richColors
+            theme="light"
+            closeButton
+          />
+        </ThemeProviders>
       </body>
     </html>
   );

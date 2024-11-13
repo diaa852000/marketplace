@@ -1,11 +1,19 @@
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
-import { IAppProps } from "@/types";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger
+} from "./ui/dropdown-menu";
+import { IUserProps } from "@/types";
 import Link from "next/link";
 
-export default function UserNavbar({email, name, userImage}: IAppProps) {
+export default function UserNavbar({ email, name, userImage }: IUserProps) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -15,29 +23,36 @@ export default function UserNavbar({email, name, userImage}: IAppProps) {
                             src={userImage}
                             alt="User Image"
                         />
-                        <AvatarFallback>{name.slice(0,1)}</AvatarFallback>
+                        <AvatarFallback>{name.slice(0, 1)}</AvatarFallback>
                     </Avatar>
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuLabel className="font-normal">
-                    <div className="flex flex-col space-y-2">
+                    <div className="flex flex-col space-y-2 py-1">
                         <p className="text-sm font-medium leading-none">{name}</p>
-                        {email &&  <p className="text-xs leading-none text-muted-foreground">{email}</p>}
+                        {email && <p className="text-xs leading-none text-muted-foreground">{email}</p>}
                     </div>
                 </DropdownMenuLabel>
-                <DropdownMenuSeparator/>
+                <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                    <DropdownMenuItem asChild className="text-[17px] cursor-pointer">
+                    <DropdownMenuItem asChild className="cursor-pointer">
                         <Link href='/sell'>
-                            Sell your product
+                            Sell
                         </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem>Test Item</DropdownMenuItem>
-                    <DropdownMenuItem>Test Item</DropdownMenuItem>
-                    <DropdownMenuItem>Test Item</DropdownMenuItem>
+                    <DropdownMenuItem asChild className="cursor-pointer">
+                        <Link href={"my-products"}>
+                            My Products
+                        </Link>
+                    </DropdownMenuItem>
                 </DropdownMenuGroup>
-                <DropdownMenuSeparator/>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild className="cursor-pointer">
+                    <Link href='/settings'>
+                        Settings
+                    </Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                     <LogoutLink>Log out</LogoutLink>
                 </DropdownMenuItem>
