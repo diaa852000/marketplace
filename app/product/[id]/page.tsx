@@ -5,8 +5,10 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { getProductData } from "@/lib/helpers";
 import { JSONContent } from "@tiptap/react";
 import Image from "next/image";
+import {unstable_noStore as noStore} from 'next/cache';
 
 export default async function ProductPage({ params }: { params: { id: string } }) {
+    noStore();
     const data = await getProductData(params.id);
 
     return (

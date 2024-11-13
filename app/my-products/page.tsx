@@ -2,8 +2,10 @@ import NoData from "@/components/NoData";
 import ProductCard from "@/components/ProductCard";
 import { findUser, getAllUserProducts } from "@/lib/helpers"
 import { redirect } from "next/navigation";
+import {unstable_noStore as noStore} from 'next/cache';
 
 export default async function MyProductPage() {
+    noStore();
     const user = await findUser();
     if (!user) redirect('/');
 

@@ -1,8 +1,10 @@
 import ProductRow from "@/components/ProductRow";
 import { CategoriesEnum } from "@/constants";
 import { findUser } from "@/lib/helpers";
+import {unstable_noStore as noStore} from 'next/cache';
 
 export default async function Home() {
+  noStore();
   const user = await findUser();
 
   return (

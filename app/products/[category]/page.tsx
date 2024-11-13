@@ -1,8 +1,10 @@
 import NoData from "@/components/NoData";
 import ProductCard from "@/components/ProductCard";
 import { getCategoryData } from "@/lib/helpers"
+import {unstable_noStore as noStore} from 'next/cache';
 
 export default async function CategoryPage({ params }: { params: { category: string } }) {
+    noStore();
     const data = await getCategoryData(params.category);
 
     return (
