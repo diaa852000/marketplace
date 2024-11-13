@@ -13,7 +13,7 @@ export default async function SettingsPage() {
 
     if(!user) redirect('/');
 
-    const data = await getUserUpdateData(user.id);
+    const data = await getUserUpdateData(user?.id as string);
 
     return (
         <section className="main-container my-8">

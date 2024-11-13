@@ -9,7 +9,7 @@ export default async function MyProductPage() {
     const user = await findUser();
     if (!user) redirect('/');
 
-    const data = await getAllUserProducts(user.id);
+    const data = await getAllUserProducts(user?.id as string);
 
     return (
         <section className="main-container my-8">
