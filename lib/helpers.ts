@@ -75,7 +75,7 @@ export async function getProductData(productId: string) {
 
 export async function getCategoryData(category: string) {
     let input;
-    switch(category) {
+    switch (category) {
         case "tamplate": {
             input = "tamplate";
             break;
@@ -88,7 +88,7 @@ export async function getCategoryData(category: string) {
             input = "icon";
             break;
         }
-        case "all" : {
+        case "all": {
             input = undefined;
             break;
         }
@@ -100,7 +100,7 @@ export async function getCategoryData(category: string) {
     const data = await prisma.product.findMany({
         where: {
             category: input as CategoryTypes,
-        }, 
+        },
         select: {
             id: true,
             images: true,
@@ -130,14 +130,14 @@ async function getRowsCategoryData(category: string) {
     });
     return {
         data,
-        title: category === "tamplate" ? 'template' :`${category}s`,
+        title: category === "tamplate" ? 'template' : `${category}s`,
         link: `/products/${category}`,
     }
 }
 
 
-export async function getRowData({category}: ICategories) {
-    switch(category) {
+export async function getRowData({ category }: ICategories) {
+    switch (category) {
         case CategoriesEnum.ICONS: {
             return getRowsCategoryData(category);
         }
@@ -206,19 +206,23 @@ export async function findProduct(id: string) {
         },
     });
 
-    if(!data) throw new Error("There's no Product with this Id");
+    if (!data) throw new Error("There's no Product with this Id");
     return data;
 }
 
 
 export async function FindUserDb(id: string) {
-    const data = await prisma.user.findUnique({
+    if (!id) {
+        throw new Error("not Authenticated")
+    }
+
+    const data = await prisma.user.findFirst({
         where: {
             id: id as string,
         }
     });
 
-    if(!data) return;
+    if (!data) return;
 
     return data;
 }
